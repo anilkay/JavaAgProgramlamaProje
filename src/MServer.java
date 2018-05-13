@@ -31,7 +31,8 @@ class ServerThing  extends Thread {
             PrintWriter writer=new PrintWriter(socket.getOutputStream());
             String clientType=s.nextLine();
             ServerProtocol protocol=new ServerProtocol(clientType);
-            String message = protocol.determineFunction();
+            String message = protocol.determineFunction("");
+
             String message2 = "";
             while (true) {
                 writer.println(message);
@@ -39,7 +40,7 @@ class ServerThing  extends Thread {
 
                 message2 = s.nextLine();
                 System.out.println(message2);
-                message = protocol.determineFunction();
+                message = protocol.determineFunction("");
             }
         } catch (IOException e) {
             e.printStackTrace();

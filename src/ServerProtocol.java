@@ -1,3 +1,8 @@
+import Ismakinesi.IsMakinesi;
+import Ismakinesi.MakineTuru;
+import Utils.Databases;
+import Utils.IdUtils;
+
 public class ServerProtocol {
     static int id=0;
     final int WAITING = 0;
@@ -9,25 +14,33 @@ public class ServerProtocol {
         this.ClientType = clientType;
         if(clientType.equalsIgnoreCase("ismakinesi")){
             currentState=AUTHORİZED;
-            responseIsmakinesi();
+            responseIsmakinesi(clientType);
         }
     }
 
     String ClientType;
 
-    public String determineFunction() {
+    public String determineFunction(String input) {
         if (ClientType.equalsIgnoreCase("planlamaci")) {
-            return responsePlanla();
+            return responsePlanla(input);
         } else {
-           return responseIsmakinesi();
+            return responseIsmakinesi(input);
         }
     }
 
-    public String responsePlanla() {
+    public String responsePlanla(String input) {
         return "Give Credits";
     }
 
-    public String responseIsmakinesi() {
+    public String responseIsmakinesi(String input) {
+        IsMakinesi ismakinesi = new IsMakinesi("isim", MakineTuru.CNC);
+        ismakinesi.makineId = IdUtils.makineId++;
+        System.out.println(ismakinesi.statu);
+        Databases.ısMakinesiListesi.add(ismakinesi);
         return "ismakinesi baglandın";
+    }
+
+    public String handleInputPlanlama(String input) {
+        return "";
     }
 }

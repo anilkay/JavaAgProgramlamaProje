@@ -2,21 +2,15 @@ package Ismakinesi;
 
 import java.io.PrintWriter;
 import java.util.Scanner;
-enum MakineTuru{
-    CNC,
-    DOKUM,
-    KILIF,
-    KAPLAMA
-}
-public class IsMakinesi {
-    String name;
-    Scanner scanner;
-    PrintWriter writer;
-    MakineTuru makineTuru;
-    int birimhiz;
-    String statu;
-    String makineId;
 
+public class IsMakinesi {
+    public String name;
+    public Scanner scanner;
+    public PrintWriter writer;
+    public MakineTuru makineTuru;
+    public int birimhiz;
+    public String statu;
+    public int makineId;
     public IsMakinesi(String name, MakineTuru makineTuru) {
         this.name = name;
         int k = birimhiz;
