@@ -8,6 +8,6 @@ import java.util.Collections;
 import java.util.List;
 
 public class Databases {
-    List<IsMakinesi> ısMakinesiListesi = Collections.synchronizedList(new ArrayList<>());
-    List<Planlamaci> planlamaciListesi = Collections.synchronizedList(new ArrayList<>());
+    public static List<IsMakinesi> ısMakinesiListesi = Collections.synchronizedList(new ArrayList<>());
+    public static List<Planlamaci> planlamaciListesi = Collections.synchronizedList(new ArrayList<>());
 }
