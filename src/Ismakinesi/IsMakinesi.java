@@ -13,6 +13,7 @@ public class IsMakinesi {
     Scanner scanner;
     PrintWriter writer;
     MakineTuru makineTuru;
+    String statu;
     String makineId;
 
     public IsMakinesi(String name, MakineTuru makineTuru) {
