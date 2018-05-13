@@ -6,15 +6,18 @@ enum MakineTuru{
     CNC,
     DOKUM,
     KILIF,
-    KAPLAMA;
-        }
+    KAPLAMA
+}
 public class IsMakinesi {
     String name;
     Scanner scanner;
     PrintWriter writer;
+    MakineTuru makineTuru;
     String makineId;
-    public IsMakinesi(String name) {
+
+    public IsMakinesi(String name, MakineTuru makineTuru) {
         this.name = name;
+        this.makineTuru = makineTuru;
     }
 
     public IsMakinesi(String name, Scanner scanner, PrintWriter writer) {

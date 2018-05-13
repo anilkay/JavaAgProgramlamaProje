@@ -3,7 +3,6 @@ package Ismakinesi;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.math.BigInteger;
 import java.net.InetAddress;
 import java.net.Socket;
 import java.util.Scanner;
@@ -13,10 +12,19 @@ import java.util.concurrent.TimeUnit;
 
 class PlanlamaciThing2 extends Thread{
  IsMakinesiProtocol protocol;
-    public String MyWork(){
-        BigInteger next = new BigInteger("12312312312312323445029842837598734523234455555234");
-        BigInteger prime = next.nextProbablePrime();
-        return prime.toString();
+    int isMakinesiId;
+    int birimhiz;
+
+    public String MyWork() throws IOException {
+        long now = System.currentTimeMillis();
+        PrintWriter writer = new PrintWriter(socket.getOutputStream());
+        writer.println("ismakinesi busy " + isMakinesiId);
+        while (now + birimhiz * 60 * 1000 >= System.currentTimeMillis()) { //Şuna uzun bir biçimde bak arkadaşım
+
+        }
+        writer.println("ismakinesi empty " + isMakinesiId);
+        return "";
+
     }
     Socket socket;
     ExecutorService executorService;
@@ -32,7 +40,10 @@ class PlanlamaciThing2 extends Thread{
         try {
             Scanner s = new Scanner(socket.getInputStream());
             PrintWriter writer = new PrintWriter(socket.getOutputStream());
-            writer.println("ismakinesi");
+            MakineTuru makineTuru = MakineTuru.CNC;
+            int birimhiz = 5;
+            String makineismi = "isim";
+            writer.println("ismakinesi " + makineTuru.name() + " " + birimhiz + " " + makineismi);
             writer.flush();
             String message=s.nextLine();
             System.out.println("Okundu");
@@ -65,6 +76,7 @@ public class IsMakinesiClient {
         Socket socket=new Socket(InetAddress.getLocalHost(),5891);
         ExecutorService executorService=Executors.newCachedThreadPool();
         executorService.submit(new PlanlamaciThing2(socket,executorService));
+
         System.out.println("Bağlandım");
         executorService.awaitTermination(1,TimeUnit.DAYS);
     }

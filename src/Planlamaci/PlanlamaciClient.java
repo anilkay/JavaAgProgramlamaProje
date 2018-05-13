@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.InetAddress;
 import java.net.Socket;
-import java.net.UnknownHostException;
 import java.util.Scanner;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -52,7 +51,7 @@ class PlanlamaciThing extends Thread {
 class planlamaScanner extends Thread {
     Socket socket;
     PlanlamaciProtocol protocol;
-
+    int planlamaciId;
     public planlamaScanner(Socket socket, PlanlamaciProtocol protocol) {
         this.socket = socket;
         this.protocol = protocol;
@@ -73,6 +72,17 @@ class planlamaScanner extends Thread {
             writer.println(is);
             writer.flush();
             System.out.println(is);
+            String[] splitted = is.split("\\s");
+            if (splitted[1].equalsIgnoreCase("status")) {
+                writer.println("planlamaci status " + splitted[2] + " " + planlamaciId);
+                writer.flush();
+            } else if (splitted[1].equalsIgnoreCase("work")) {
+                writer.println("planlamaci work " + splitted[2] + " " + splitted[3]); //Splitted 2 is birim
+                writer.flush();
+            } else if (splitted[1].equalsIgnoreCase("login")) {
+                writer.println("planlamaci login " + splitted[2] + " " + splitted[3]); //Username,password
+                writer.flush();
+            }
         }
     }
 }
