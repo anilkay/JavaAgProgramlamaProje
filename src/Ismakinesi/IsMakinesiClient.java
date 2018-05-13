@@ -3,11 +3,10 @@ package Ismakinesi;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.math.BigInteger;
 import java.net.InetAddress;
 import java.net.Socket;
-import java.net.UnknownHostException;
 import java.util.Scanner;
-import java.util.concurrent.Executor;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
@@ -15,7 +14,9 @@ import java.util.concurrent.TimeUnit;
 class PlanlamaciThing2 extends Thread{
  IsMakinesiProtocol protocol;
     public String MyWork(){
-          return "1";
+        BigInteger next = new BigInteger("12312312312312323445029842837598734523234455555234");
+        BigInteger prime = next.nextProbablePrime();
+        return prime.toString();
     }
     Socket socket;
     ExecutorService executorService;
