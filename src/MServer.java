@@ -1,3 +1,4 @@
+import Ismakinesi.IsMakinesi;
 import Utils.Databases;
 
 import java.io.IOException;
@@ -37,11 +38,23 @@ class ServerThing extends Thread {
             while (true) {
                 writer.println(message);
                 writer.flush();
-
+                writer.println("conn connect " + protocol.isMakinesiId);
                 message2 = s.nextLine();
                 System.out.println(message2);
+                String mesajt1[] = message2.split("\\s");
+                if (mesajt1[0].equalsIgnoreCase("ismakinesi")) {
+                    if (mesajt1[1].equalsIgnoreCase("busy")) {
+                        IsMakinesi isler = Databases.ısMakinesiListesi.get(Integer.parseInt(mesajt1[2]));
+                        isler.statu = "busy";
+                    }
+                    if (mesajt1[1].equalsIgnoreCase("empty")) {
+                        IsMakinesi isler = Databases.ısMakinesiListesi.get(Integer.parseInt(mesajt1[2]));
+                        isler.statu = "empty";
+                    }
+                }
                 message = protocol.determineFunction(message2);
                 String[] gelenler = protocol.determineFunction2(message2);
+
                 if (gelenler[0].equalsIgnoreCase("statu")) {
                     String hepsi = getAllStatus();
                     // Planlamaci planlamaci = Databases.planlamaciListesi.get(Integer.parseInt(gelenler[1]));

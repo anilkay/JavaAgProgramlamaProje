@@ -9,7 +9,7 @@ public class ServerProtocol {
     final int AUTHORİZED = 1;
     final int INVALIDAUTH = 2;
     int currentState=WAITING;
-
+    public int isMakinesiId;
     public ServerProtocol(String clientType) {
         this.ClientType = clientType;
         if(clientType.equalsIgnoreCase("ismakinesi")){
@@ -52,7 +52,8 @@ public class ServerProtocol {
         ismakinesi.makineId = IdUtils.makineId++;
         System.out.println(ismakinesi.statu);
         Databases.ısMakinesiListesi.add(ismakinesi);
-        return "ismakinesi baglandın";
+        this.isMakinesiId = isMakinesiId;
+        return "ismakinesi baglandın " + ismakinesi.makineId;
     }
 
     public String handleInputPlanlama(String input) {

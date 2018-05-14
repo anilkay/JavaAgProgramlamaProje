@@ -58,8 +58,13 @@ class PlanlamaciThing2 extends Thread{
                 System.out.println(message);
                 message=s.nextLine();
                 String[] allmsg = message.split("\\s");
+
                 if (allmsg[1].equalsIgnoreCase("work")) {
                     MyWork(Integer.parseInt(allmsg[3]));
+                } else if (allmsg[1].equalsIgnoreCase("connect")) {
+                    System.out.println("Connect state");
+                    isMakinesiId = Integer.parseInt(allmsg[2]);
+                    System.out.println("ismakinesi id " + isMakinesiId);
                 }
             }
         } catch (IOException e) {

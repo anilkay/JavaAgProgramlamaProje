@@ -29,6 +29,6 @@ public class IsMakinesi {
 
     @Override
     public String toString() {
-        return String.format("%s %s %d %d", name, makineTuru.name(), birimhiz, makineId);
+        return String.format("%s %s %d %d %s", name, makineTuru.name(), birimhiz, makineId, statu);
     }
 }
