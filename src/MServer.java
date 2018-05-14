@@ -1,4 +1,3 @@
-import Planlamaci.Planlamaci;
 import Utils.Databases;
 
 import java.io.IOException;
@@ -7,7 +6,7 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.Scanner;
 
-class ServerThing  extends Thread {
+class ServerThing extends Thread {
     Socket socket;
 
     public String getAllStatus() {
@@ -28,10 +27,10 @@ class ServerThing  extends Thread {
     public void run() {
         super.run();
         try {
-            Scanner s=new Scanner(socket.getInputStream());
-            PrintWriter writer=new PrintWriter(socket.getOutputStream());
-            String clientType=s.nextLine();
-            ServerProtocol protocol=new ServerProtocol(clientType);
+            Scanner s = new Scanner(socket.getInputStream());
+            PrintWriter writer = new PrintWriter(socket.getOutputStream());
+            String clientType = s.nextLine();
+            ServerProtocol protocol = new ServerProtocol(clientType);
             String message = protocol.determineFunction("");
 
             String message2 = "";
@@ -45,10 +44,11 @@ class ServerThing  extends Thread {
                 String[] gelenler = protocol.determineFunction2(message2);
                 if (gelenler[0].equalsIgnoreCase("statu")) {
                     String hepsi = getAllStatus();
-                    Planlamaci planlamaci = Databases.planlamaciListesi.get(Integer.parseInt(gelenler[3]));
-                    PrintWriter writer1 = planlamaci.writer;
-                    writer1.println("status " + hepsi); //Böylece hepsini yollayacağız
-                    writer1.flush();
+                    // Planlamaci planlamaci = Databases.planlamaciListesi.get(Integer.parseInt(gelenler[1]));
+                    //PrintWriter writer1 = planlamaci.writer;
+                    writer.println("status " + hepsi); //Böylece hepsini yollayacağız
+                    writer.flush();
+                    //İlk gelişte planlamaci objesi oluşturmamız lazım
                 }
             }
         } catch (IOException e) {

@@ -32,6 +32,7 @@ class PlanlamaciThing extends Thread {
             System.out.println(message);
             while (true) {
                 message = s.nextLine();
+                System.out.println(message);
                 String takeAction = protocol.inputResponse(message);
                 if (takeAction.equalsIgnoreCase("Give Credits")) {
                     String userName = "anil"; //Bunu Scannera yollama işlemini gerçekleştireceğiz.
