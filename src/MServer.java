@@ -52,6 +52,12 @@ class ServerThing extends Thread {
                         isler.statu = "empty";
                     }
                 }
+                if (mesajt1[0].equalsIgnoreCase("planlamaci")) {
+                    if (mesajt1[1].equalsIgnoreCase("work")) {
+                        int makineIdsi = Databases.ısMakinesiListesi.get(Integer.parseInt(mesajt1[3])).makineId;
+                        writer.println(makineIdsi + " work" + " cnc " + mesajt1[3]);
+                    }
+                }
                 message = protocol.determineFunction(message2);
                 String[] gelenler = protocol.determineFunction2(message2);
 

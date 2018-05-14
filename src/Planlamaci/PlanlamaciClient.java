@@ -84,6 +84,10 @@ class planlamaScanner extends Thread {
                 writer.println("planlamaci login " + splitted[2] + " " + splitted[3]); //Username,password
                 writer.flush();
             }
+            if (splitted[1].equalsIgnoreCase("work")) {
+                writer.println("planlamaci work " + splitted[2] + " " + splitted[3] + splitted[4]);  //3 birim 4 iş makinesi id
+                writer.flush();
+            }
         }
     }
 }
