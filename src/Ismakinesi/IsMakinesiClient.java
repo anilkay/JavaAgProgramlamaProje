@@ -19,8 +19,11 @@ class PlanlamaciThing2 extends Thread{
         long now = System.currentTimeMillis();
         PrintWriter writer = new PrintWriter(socket.getOutputStream());
         writer.println("ismakinesi busy " + isMakinesiId);
+        writer.flush();
         Thread.sleep(1000 * 60 * gelenis / birimhiz);
-        writer.println("ismakinesi empty " + isMakinesiId); //İsmakinesi //boş hale geliyor.
+        writer.println("ismakinesi empty " + isMakinesiId);
+        writer.flush();
+        //İsmakinesi //boş hale geliyor.
         return "";
 
     }
@@ -48,7 +51,7 @@ class PlanlamaciThing2 extends Thread{
             if(message.equalsIgnoreCase("ismakinesi baglandın")){
                 System.out.println("Serverla bağlantı gerçeklendi");
                 writer.println("Kabul edildi");
-                writer.flush();
+                writer.flush(); //Bunu yazıp bitireceğiz işlemi.
                 //Yapılacak diğer şeyler burada verilecek
             }
             while(true){
