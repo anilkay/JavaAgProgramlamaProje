@@ -15,14 +15,12 @@ class PlanlamaciThing2 extends Thread{
     int isMakinesiId;
     int birimhiz;
 
-    public String MyWork() throws IOException {
+    public String MyWork(int gelenis) throws IOException, InterruptedException {
         long now = System.currentTimeMillis();
         PrintWriter writer = new PrintWriter(socket.getOutputStream());
         writer.println("ismakinesi busy " + isMakinesiId);
-        while (now + birimhiz * 60 * 1000 >= System.currentTimeMillis()) { //Şuna uzun bir biçimde bak arkadaşım
-
-        }
-        writer.println("ismakinesi empty " + isMakinesiId);
+        Thread.sleep(1000 * 60 * gelenis / birimhiz);
+        writer.println("ismakinesi empty " + isMakinesiId); //İsmakinesi //boş hale geliyor.
         return "";
 
     }
@@ -56,11 +54,14 @@ class PlanlamaciThing2 extends Thread{
             while(true){
                 System.out.println(message);
                 message=s.nextLine();
-                if(message.equalsIgnoreCase("dowork")){
-                    MyWork();
+                String[] allmsg = message.split("\\s");
+                if (allmsg[1].equalsIgnoreCase("work")) {
+                    MyWork(Integer.parseInt(allmsg[3]));
                 }
             }
         } catch (IOException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
             e.printStackTrace();
         }
         try {

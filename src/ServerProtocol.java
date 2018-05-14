@@ -28,6 +28,21 @@ public class ServerProtocol {
         }
     }
 
+    public String[] determineFunction2(String input) {
+        String[] splittedInput = input.split("\\s");
+        if (splittedInput[0].equalsIgnoreCase("planlamaci")) {
+            if (splittedInput[1].equalsIgnoreCase("status")) {
+                return new String[]{"statu", splittedInput[2]};
+            }
+            if (splittedInput[1].equalsIgnoreCase("work")) {
+                return new String[]{"ata", splittedInput[2], splittedInput[3]}; //2 type 3 birim
+            }
+            if (splittedInput[1].equalsIgnoreCase("login")) {
+                //Login mevzusu burada yapılacak.
+            }
+        }
+        return new String[]{"geçersiz"};
+    }
     public String responsePlanla(String input) {
         return "Give Credits";
     }

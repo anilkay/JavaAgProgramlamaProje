@@ -1,3 +1,4 @@
+import Planlamaci.Planlamaci;
 import Utils.Databases;
 
 import java.io.IOException;
@@ -13,7 +14,7 @@ class ServerThing  extends Thread {
         final String[] all = new String[1];
         all[0] = "";
         Databases.ısMakinesiListesi.forEach(i -> {
-            all[0] += i.toString() + "\n";
+            all[0] += i.toString() + "\t";
         });
 
         return all[0];
@@ -40,7 +41,15 @@ class ServerThing  extends Thread {
 
                 message2 = s.nextLine();
                 System.out.println(message2);
-                message = protocol.determineFunction("");
+                message = protocol.determineFunction(message2);
+                String[] gelenler = protocol.determineFunction2(message2);
+                if (gelenler[0].equalsIgnoreCase("statu")) {
+                    String hepsi = getAllStatus();
+                    Planlamaci planlamaci = Databases.planlamaciListesi.get(Integer.parseInt(gelenler[3]));
+                    PrintWriter writer1 = planlamaci.writer;
+                    writer1.println("status " + hepsi); //Böylece hepsini yollayacağız
+                    writer1.flush();
+                }
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -57,6 +66,7 @@ public class MServer {
             Socket socket = serverSocket.accept(); //Düzgün bir şekilde çalışıyor gibi görünüyor.
             new ServerThing(socket).start();
             System.out.println("Bağlantı gerçekleşti");
+            //Planlamacıyı bağlamaya çalış
         }
     }
 }
